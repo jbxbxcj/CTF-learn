@@ -1,0 +1,16 @@
+这里可以改邮件,burp里面可以在在邮件的response里面找到目标参数:roleid
+扔给repeater,然后把请求体(requests body)的JSON文件从:
+{
+    "email":"wiener@admin-user.net"
+}
+改成:
+{
+    "email":"wiener@admin-user.net",(细节逗号,这是JSON的语法)
+    "roleid":2
+}
+然后send,返回 302/重定向,提权成功   (302只能说明请求被处理,回去刷新才知道有没有成功)
+
+刷新靶场,登录/admin,解得此题
+
+
+典型的纵向越权,服务器错误地相信了JSON里的信息.正常情况服务器不应该详细任何前端信息

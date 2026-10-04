@@ -1,0 +1,26 @@
+靶场地址: https://portswigger.net/web-security/cross-site-scripting/reflected/lab-html-context-nothing-encoded
+
+=====新知识1:XXS=====
+SQLi: 输入被拼进服务器端的 SQL语句,影响数据库
+XSS: 输入被原样或不安全地放进了网页 HTML,影响浏览器如何解析页面
+反射型XSS: 输入只随这一次请求返回页面;刷新,换页,其他用户访问时不会保留
+存储型XSS: 先被保存,之后展示的时候在触发
+
+=====新知识2:html可执行的JS=====
+整一个弹窗,弹 ???
+<script>
+    alert("???")
+</script>
+
+
+###
+进入靶场
+对着这个搜索框搜点不太可能有的东西 -> 图1
+Ctrl+U Ctrl+F 发现可以在源码中看到 -> 图2
+
+###
+在搜索框里面输入 <script>alert(1)</script> -> 图3.图4
+solved
+
+防护:
+把 <> 显示为 &lt;&gt(HTML实体编码); ,这样浏览器只会显示文字,不会把它当作标签执行

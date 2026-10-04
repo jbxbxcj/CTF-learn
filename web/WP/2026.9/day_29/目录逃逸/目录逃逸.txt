@@ -1,0 +1,21 @@
+靶场地址: https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-path-traversal
+
+=====新知识1: 返回上级目录=====
+.. 是返回上级目录
+比如原保存路径是 A/B
+上传 read.php 应该保存在 A/B/read.php
+但是上传 ../read.php 保存在 A/B/../read.php -> A/read.php
+
+###
+进入靶场,直接上传 read.php 
+可以上传,但是只会被当成文本     -> 图1
+本题是 avatar这个头像目录下的都不执行
+
+###
+拦包,改filename   ->  图2
+找到刚才的请求,改一下请求头去上级路径找 read.php  -> 图3.图4
+solved
+=>
+但是我又试了一下
+../read.php不行,但是 ..%2fread.php却可以
+URL编码发力了???

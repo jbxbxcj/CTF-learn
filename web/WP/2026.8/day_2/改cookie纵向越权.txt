@@ -1,0 +1,6 @@
+<!--true才十五正确拼写-->
+一:
+F12,application -> cookie -> admin -> 双击value改成true
+二:
+burp抓包,拦截与否都可以
+admin改掉

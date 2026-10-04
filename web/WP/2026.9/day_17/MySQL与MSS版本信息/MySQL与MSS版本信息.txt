@@ -1,0 +1,14 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/examining-the-database/lab-querying-database-version-mysql-microsoft
+
+=====新知识1=====
+MySQL和 Microsoft SQL serve 去找版本信息
+->
+SELECT @@version
+
+###
+进入靶场,测试出两个 NULL,NULL
+=>
+替换后发现第一个是字符串
+=>
+@@version
+solved

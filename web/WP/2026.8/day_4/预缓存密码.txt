@@ -1,0 +1,4 @@
+靶场地址: https://0a46004b0436f6a1817f43fd00070015.web-security-academy.net/
+
+抓包,丢给repeater
+id改掉,直接搜password,找到administrator的密码

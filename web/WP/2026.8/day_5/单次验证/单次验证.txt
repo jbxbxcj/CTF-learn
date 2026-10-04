@@ -1,0 +1,14 @@
+靶场地址: https://portswigger.net/web-security/access-control/lab-multi-step-process-with-no-access-control-on-one-step
+
+/admin      ->      gun,这不是你能看的东西
+既然都到 confrim这一步了,那他一定是管理员吧
+
+登录 administrator:admin 找到提前carlos的包
+把session改成wiener的,发包
+solved
+
+直接改admin的包可以
+但是我改wiener的包不行(第一次校验没过)
+
+因为先校验了一次: admin才能操作
+但是第二次没有校验: 只有admin才能确认

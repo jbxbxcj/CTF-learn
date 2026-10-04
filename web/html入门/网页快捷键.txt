@@ -1,0 +1,5 @@
+Ctrl+U: 打开源码
+Ctrl+F: 搜索关键字
+Ctrl+Shift+F: 在所有已加载资源中寻找关键字
+Ctrl+F5: 清理缓存
+

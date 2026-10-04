@@ -1,0 +1,11 @@
+靶场地址: https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-different-responses
+
+依旧抓包 Ctrl+I
+
+### 
+通过load导入 txt,开始攻击
+
+###
+length排序
+在搜索栏搜 Invalid username,找找没有匹配项的    -> 图2
+确认用户名后,同理操作password   -> 图3

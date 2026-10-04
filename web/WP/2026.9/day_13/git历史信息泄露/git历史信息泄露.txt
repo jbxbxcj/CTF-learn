@@ -1,0 +1,47 @@
+靶场地址: https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-in-version-control-history
+
+###
+登录靶场,随便点两个商品信息,让burp收集一下网页
+发现 存在 /.git 路径    -> 图1
+
+###
+在浏览器中访问这个页面,查看信息
+发现admin密码在当前版本已经被删除了 -> 图2
+推测旧版本中可能存在明文密码
+
+###
+调用 git-dumper去恢复个仓库
+</power shell>
+python git_dumper.py "靶场地址/.git/" lab_git
+python: 调用当前 Python虚拟环境中的解释器
+git_dumper.py: 恢复工具脚本
+"" : 目标站点暴露的元数据目录
+lab_git: 本地恢复出的 Git仓库目录
+=> 图3
+
+###
+git -C lab_git log --all --oneline
+->
+-C lab_git: 让 Git在恢复出的仓库目录中执行
+log: 列出提交历史
+--all: 全部列出来,包含所有分支
+--oneline: 每个提交压缩为一行,便于定位
+
+###
+得到该靶场 git相关信息 -> 图4
+=>
+72287e7: 从config里面删掉了管理员密码
+618df89: 加入了管理员操作面板
+
+###
+查看 72287e7这个版本
+git -C lab_git show 72287e7
+=>
+得到管理员密码
+solved
+
+防护:
+1. 生产部署包中排除 .git
+2. 服务器禁止访问 /.git/
+3. 曾经提交到历史中的密码.令牌,必须轮换(直接让旧的失效)
+4. 不在代码.配置仓库中保存明文数据

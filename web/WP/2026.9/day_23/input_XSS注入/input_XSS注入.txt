@@ -1,0 +1,28 @@
+靶场地址: https://portswigger.net/web-security/cross-site-scripting/contexts/lab-attribute-angle-brackets-html-encoded
+
+=====新知识1: JS.属性.上下文=====
+HTML 上下文: <input value="???">
+JS 字符串上下文: var x='???'
+URL 上下文: <a href="???">
+HTML实体编码.URL编码.JavaScrip 转义的作用边界
+
+=====新知识2:input焦点=====
+对于input
+<input autofocus> 可以让input自动获得焦点
+<input onfocus=???> 可以让input获得焦点时执行 ???
+<input autofocus onfocus=???> 就可以实现本靶场的复现
+
+###
+进入靶场
+发现评论区没有用,<>" 被编码成 &lt;&gt;&quto;
+不能直接来
+
+###
+搜索框输入 test123寻找上下文 -> 图1
+=>
+这里是HTML上下文,input类型
+用新知识2注入 test" autofocus onfocus=alert(1) x="
+前面的 "是为了结束字符串
+后面的 " 是为了接住页面模板原有的结束双引号,避免 HTML结构被破坏
+
+// 其实 x="" 也没啥实际意义

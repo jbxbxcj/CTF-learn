@@ -1,0 +1,21 @@
+靶场地址: https://portswigger.net/web-security/access-control/lab-method-based-access-control-can-be-circumvented
+
+Insecure Direct Object Reference   不安全直接对象引用(横向越权)
+我改了一个参数,服务器在取数据的时候有没有检测:这个数据是不是当前用户能访问的
+
+先登录admin界面,看看提权命令长什么样 -> 如 图1 /admin-roles?username=...&action=upgrade
+
+然后回到wiener账号,抓包,丢给repeater
+
+把包改成 POST /admin-roles?username=...&action=upgrade
+显示 unauthorized 无权限
+POSTX是非标准HTTP请求方法,试一试也许
+
+把 POST 改成 GET ,发过去
+solved
+
+后端校验大概是这样:
+POST请求方法:   读取username,action
+                查看是否有权限    -> 是否执行
+GET 请求方法:   读取username,action
+                执行升级    -> 未校验

@@ -1,0 +1,21 @@
+靶场地址: https://portswigger.net/web-security/cross-site-scripting/stored/lab-html-context-nothing-encoded
+
+###
+其实和反射型区别不是很大    -> 图1
+sloved
+
+1. 漏洞类型：存储型XSS
+2. 输入点： 评论输入框
+3. 保存与输出链： 评论交给服务器 -> 服务器保存 -> 访问博客 -> 
+                服务器读取评论并放入html响应 -> 浏览器解析并执行其中标签
+4. 输出上下文：<section class="comment">
+                    <p>
+                    <img src="/resources/images/avatarDefault.svg" class="avatar">                            absd | 15 September 2026
+                    </p>
+                    <p><script>alert(1)</script></p>
+                    <p></p>
+                </section>
+            comment被放在<p>用户输入</p>中,浏览器把输入中的标签当作真正的HTML标签解析
+5. 验证现象：刷新页面出现提示框
+6. 影响范围：评论保存期间,每一个进入/刷新页面的用户
+7. 修复原则：把 <>&转换为&lt;&gt;&amp

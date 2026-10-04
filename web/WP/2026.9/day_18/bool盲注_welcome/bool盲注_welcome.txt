@@ -1,0 +1,44 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/blind/lab-conditional-responses
+
+=====新知识1=====
+如何判断密码长度
+' and length((select password from users where username='administrator')) =20/>10/>15
+->  这里要多套个括号,emmm, length接收的得是一个值而非语句
+二分快速确定密码长度是 20
+
+=====新知识2=====
+从字符串里面挑一个比较
+' and substring((select password from users where username='administrator'),1,1)
+-> substring(字符串,取多少,从哪开始取)
+
+=====新知识3=====
+Burp Intruder的四种攻击模式:
+Sniper: 一个字典,每次只替换一个位置                 位置数*字典数
+Battering ram: 一个字典,一个值同时填入全部位置      字典数
+Pitchfork: 多个字典,对应位置替换                    最短字典长度
+Cluster bomb: 多个字典,测试所有组合                 各字典长度相乘
+
+###
+进入靶场,开始login
+对着 password开始使用 UNION的神秘魔咒,发现 SELECT有两个字符串的列
+但是在 response里面搜索 'abc'
+->
+发现 SELECT查询内容无法回显
+
+###
+本题中能拼到 SQL语句的: cookie,login的数据
+cookie里面有俩东西: TrackingId,session
+session就不要想了,改了可能让对话失效
+尝试对着 TrackingId进行神秘的 SQL注入
+
+###
+本题的 TrackingId为真时,会返回 Welcome back!
+于是就有了本题对于密码的猜测
+每一次返回 Welcome back!,都代表本次猜测正确
+
+###
+找到密码长度为20 -> 图1
+
+###
+使用第4种攻击方式,尝试720种组合
+得到 password -> 图2

@@ -1,0 +1,38 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/blind/lab-sql-injection-visible-error-based
+
+=====新知识1:类型转换报错=====
+' and CAST('ABC' AS int)=1 --+
+
+=====新知识2:选择限制=====
+只要???条 SELECT password FROM users LIMIT ???
+跳过前???条 SELECT password FROM users OFFSET ???
+such as->
+只要5.6两条
+SELECT password FROM users LIMIT 2 OFFSET 4
+
+###
+进入靶场,发现这是一列的非 Oracle数据库 -> 图1,图2
+
+###
+构造 ' SELECT CAST('abc' AS int)--
+发现 abc会在 response中回显     -> 图3
+
+###
+开始寻找 password,并在回显中寻找它
+发现报错信息里是缺失的SQL语句
+->
+SELECT password FROM user WHE (没了) -> 图4
+数据库读到最后发现 SQL语句不完整,抛出语法错误
+=>
+应该是 payload的长度过长
+
+###
+缩短 TradingId的长度为 u(一个字符)
+重新尝试,还是不行 -> 图5
+这时候就要对 WHERE动手了
+=>
+将 WHERE变成 LIMIT 和 OFFSET,进一步缩短长度
+=>
+去找 administrator在第几列  -> 图6
+然后去找这一行的密码        -> 图7
+solved

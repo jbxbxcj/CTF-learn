@@ -1,0 +1,13 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/lab-sql-injection-with-filter-bypass-via-xml-encoding
+
+###
+XML编码去python找
+
+###
+我之前构造的都是字符串类型的,都是 ' UNION SELECT...
+这里却是数字类型,直接 UNION SELECT 就行
+
+###
+solved -> 图1
+
+根因:拦截了 UNION等敏感信息,却忽略了 XML编码后形成的 UNION

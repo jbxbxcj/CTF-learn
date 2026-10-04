@@ -1,0 +1,7 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/blind/lab-time-delays-info-retrieval
+
+###
+之前提到过的,pg_sleep(8) 替代error
+确认时间盲注 -> 图1
+确认密码长度 -> 图2
+注 -> 图3

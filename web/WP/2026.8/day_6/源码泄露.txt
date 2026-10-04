@@ -1,0 +1,9 @@
+靶场地址: https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-via-backup-files
+
+依旧试一试: \robots.txt
+本靶场内发现: 存在路径 \backup
+
+访问 \backup,
+发现没有拦截,直接进入 -> 图2
+
+找到数据库密码  -> 参考图2,图3

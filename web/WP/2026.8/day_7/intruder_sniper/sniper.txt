@@ -1,0 +1,20 @@
+随便进入一个burp靶场,进入商品界面,抓包
+
+###
+找一个包: GET /product?productId=1 HTTP/2
+Ctrl+I 丢给 Intruder
+进入 -> 图1
+
+###
+图2 -> add,批量数据填写位置
+这里是 ?productID 参数
+=>
+图2 -> 右侧侧边栏,add处.一份数据一回车
+最后 start attack
+
+###
+(会跳出来一个弹窗,不用管他)
+最后界面 -> 图3,图4(点击length排序后的结果)
+
+附:
+paste是把剪切版里面的内容转化为payload的内容

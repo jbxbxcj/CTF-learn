@@ -1,0 +1,24 @@
+在控制台里面可以输入JS命令 -> js控制HTML
+
+element(元素):
+document.documentElement        整个DOM
+document.body                   html的body部分 -> 整个网页
+document.head                   html的head部分
+alert(??)                       让网页弹窗显示??,html的标签script,就是用来标识内部JS命令
+document.title                  返回测试页面
+document.getElementById(???)    想找什么自己填
+
+Network(网络):
+F5                              刷新网页
+Cookie(客户端)                  标识/让浏览器保存 -> 用户信息
+session(服务器)                 ~~~
+
+状态码:
+200 -> 成功     301/302 -> 永久/临时重定向(跳转)     400 -> 请求有问题
+401 -> 未认证   403 -> 禁止访问                     404 -> 不存在
+500 -> 服务器错误
+
+
+Application(应用):
+cookie客户端身份认证
+session服务器端验证

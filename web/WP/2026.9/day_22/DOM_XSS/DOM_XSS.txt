@@ -1,0 +1,44 @@
+靶场地址: https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink
+
+=====新知识1: DOM_XSS=====
+DOM: Document Object Model 文档对象模型
+XSS: Cross-Site Scripting 跨站脚本
+
+=====新知识2: html的SQL=====
+先看一段图2中的函数:
+document.write(
+    '<img src="/resources/images/tracker.gif?searchTerms='query'">'
+);
+document.write(): 把这一堆字符串当作 HTML写进当前页面
+img(image):图片
+src(sources): 资源路径
+query: 你输入的.要查询的东西
+=>
+这个东西和SQL非常像, query带着 "> (SQL同款 '...--+)
+
+###
+进入靶场,本来要找 document.write
+我在评论输入框捣鼓了半天,都没找到 document.write
+直接 <script>也不行     -> 图1
+
+###
+这个不行,那就去最上面的搜索框看看   -> 图2
+有这个东西,它非常类似 SQL只是 ' 变成了 ">
+开始注入:
+"><svg onload alert(1)>     -> 图3,图4
+=>
+最后,拼接后的结构变成了:
+<img src="...?searchTerms="><svg onload alert(1)>">
+->
+svg: 矢量图元素(其实我对它没有兴趣)
+onload: 元素加载完成时执行,是一个事件属性
+
+=>
+最后面多出来一个 "> 会被当成文本直接显示
+solved
+
+###
+最后我又试了一下,不用 svg那一堆也可以
+=>
+"><script>alert(jbx)</script>   -> 图5
+solved

@@ -1,0 +1,29 @@
+靶场地址: https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-on-debug-page
+
+###
+进入靶场,观察有没有什么异常
+-> 无
+
+###
+找个response,搜 php等,收集一下信息
+找到一个链接    -> 图1
+
+###
+去这个链接里面
+Ctrl+F 去搜 key ->
+找到key
+
+###
+solved
+
+根因:
+生产环境遗留了 HTML注释和公开访问的 phpinfo调试页
+导致敏感环境变量被未授权访问者读取
+修复:
+删除注释中的调试链接和调试界面
+敏感页面受控访问
+
+
+###
+信息收集清单(4) 中提及过搜索 debug,php
+但是我没有想起来用,还是练的少

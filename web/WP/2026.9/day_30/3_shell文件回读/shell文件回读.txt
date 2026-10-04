@@ -1,0 +1,22 @@
+靶场地址: https://portswigger.net/web-security/os-command-injection/lab-blind-output-redirection
+
+=====新知识1: 文件写入=====
+whoami>???.txt
+把用户名写入文件
+=>
+和SQL,XSS的带外交互OOB一样
+都是原请求看不到结果,就去另一个地方寻找证据
+
+###
+进入靶场
+找到邮箱位置稍微 ping一下发现这个位置可以攻击   -> 图1
+
+###
+构造 ||+whoami+>+/var/www/images/read.txt+||qq@qq.com     -> 图2
+把用户名写入 read.txt文件
+=>
+因为路径名称里面有 images
+所有找一个 GET图片的请求,改 filename去找 read.txt       -> 图3
+-> 其实直接 GET 路径 应该也可以,不必非得找个图片
+找到用户名 -> 图4
+solved

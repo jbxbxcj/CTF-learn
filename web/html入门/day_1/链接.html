@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--这里是注释 -->
+<!-- 链接语法<a href="url" > 网站显示这行字</a>-->
+
+<h3><a href="https://www.baidu.com">这里指向百度</a></h3>
+<p><a href="https://www.baidu.com">百度plus</a></p>
+
+<p><a href="https://www.runoob.com/">这里<br>指向菜鸟教程</a></p>
+
+<h5 id="abc">锚点链接,id为abc</h5>
+
+<h3>target:定义链接的打开放式,四种参数如下</h3>
+<p>
+    <a href="https://www.runoob.com/" target="_blank" rel="noopener noreferrer">_blank 在新窗口或新标签页中打开<br></a>
+    target="_blank" rel="noopener noreferrer"常用,rel安全属性 参数防止新页面修改旧页面,也是更为规范的写法<br>
+    <a href="https://www.runoob.com/" target="_self">_self 当前处打开<br></a>
+    <a href="https://www.runoob.com/" target="_parent">_parent 在父框架中打开<br></a>
+    <a href="https://www.runoob.com/" target="_top">_top ???<br></a>
+    默认是_self,在iframe框架里面_parent和_top的区别才明显<br>
+    .<br>.<br>.<br>.<br>.
+    这边不占位,跳转不明显
+</p>
+
+<a href="#top">返回顶部</a>
+<a href="#abc"><br>返回锚点id为abc的地方</a>
+
+<h3>下载链接</h3>
+<p>
+    <a href="../photo/test.png" download="">下载png照片,顺便../返回路径</a>
+    <br>download后面加东西可以指定下载后的初始名
+    <a href="../photo/test.png" download="defaut"><br>下载png照片</a>
+</p>

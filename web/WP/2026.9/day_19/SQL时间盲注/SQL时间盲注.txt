@@ -1,0 +1,26 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/blind/lab-time-delays
+
+=====新知识1:不同数据库的睡眠函数=====
+PostgreSQL: pg_sleep(10)
+MySQL: SLEEP(10)
+SQL Server: WAITFOR DELAY '0:0:10'      (wait for delay)
+Oracle: dbms_pipe.receive_message(('a'),10)
+常见测试是:
+'||睡眠函数--
+->
+之前SQL靶场中，有通过ERROR回显和CASE WHEN THEN ELSE END构造请求的，
+在报错信息隐藏的时候，睡眠函数可以代为行使相似的作用
+
+=====新?知识2:查看响应时间=====
+ 图1 右下角的 millis -> millisecond n.毫秒 
+
+###
+进入靶场
+把上面4个睡眠函数都试一遍 -> 图2
+solved
+
+补:
+但是我发现 睡眠函数只有 10秒,但是响应时间却有 20多秒
+这个睡眠函数可能被执行了两次
+在试一次 pg_sleep(5),响应了 10多秒 -> 图3
+猜想合理

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h3>属性</h3>
+        <p>1.多数出现在开始标签里面<br />2.总是以name="value"的形式出现<br>
+        such as: <a href="http://www.runoob.com"></a>
+        </p>
+        
+        
+    </body>
+</html>

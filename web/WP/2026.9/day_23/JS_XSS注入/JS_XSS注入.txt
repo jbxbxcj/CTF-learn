@@ -1,0 +1,20 @@
+靶场地址: https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-string-angle-brackets-html-encoded
+
+=====新知识1:JS注释=====
+和 C语言一样,是 //
+
+###
+进入靶场
+依旧是 <> 被编码成 &lt;&gt
+
+###
+test123寻找上下文,JS类型 -> 图1
+=>
+var 标签='???';
+
+###
+整体构造思路:
+test';alert(1)//
+最后的样子应该是:
+var 标签=' test';alert(1) //';      -> 图2
+solved

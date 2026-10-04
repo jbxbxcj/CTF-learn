@@ -1,0 +1,25 @@
+靶场地址: https://0a2f00d703a2e8ef8039213500480053.web-security-academy.net/
+
+=====新知识=====
+SQL中 || 表示字符串拼接
+such as: username || '~' || password
+会变成 -> username~password
+
+=====tips=====
+SELECT+NULL,'aaaaa'不会报错,在服务器眼里它是: NULL|'aaaaa'
+SELECT+NULL, aaaaa会报错,因为服务器里面没有 aaaaa这一栏
+
+###
+进入靶场
+SQL注进去,发现有两列    -> 图1
+
+###
+尝试替换两个位置,找一找哪个是字符串类型的列 -> 图2,图3
+(因为账密是以字符串形式存储起来)
+
+###
+只有一个字符串的位置
+去找账密    -> +NULL,username+||+'~'+||+password+FROM+users--+
+=>
+图4
+solved

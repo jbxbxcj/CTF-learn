@@ -1,0 +1,6 @@
+靶场地址: https://portswigger.net/web-security/access-control/lab-user-id-controlled-by-request-parameter-with-password-disclosure
+
+抓包,找input -> 图1
+缓存里面就是对应密码
+登录管理员界面,删掉carlos
+solved

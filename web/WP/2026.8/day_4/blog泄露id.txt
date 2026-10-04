@@ -1,0 +1,12 @@
+靶场地址: https://0a9700700344db7d81c720ab00670099.web-security-academy.net/
+
+找一个carlos的blog,然后抓包搜id,能找到信息
+拦截/my-account,id改掉
+solved
+
+我没有留意查看网站的内容,导致第一时间漏掉了blog的突破点
+第二时间没有准确在response里面找到carlos的id,
+看提示才去找第二遍
+
+1. 搜的时候可以试着搜 id=
+2. 不要只想着myaccount,网站里面还有别的资源可以利用

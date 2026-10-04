@@ -1,0 +1,17 @@
+靶场地址: https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-obfuscated-file-extension
+
+=====新知识1: 空字节%00=====
+URL编码的空字节 %00
+如 abc.php%00ABC.jpg
+验证文件名时,从后往前看,看到伪装的 ABC.jpg,被%00截断
+后续保存/解析文件时,从前往后看,看到 abc.php被%00截断
+
+###
+进入靶场
+拦包,改后缀 -> 图1
+=>
+我们上传的虽然是 abc.php%00ABC.jpg
+但是因为 %00截断,实际保存的是 abc.php -> 图2
+=>
+Ctrl+R 去找这个文件 -> 图3
+solved

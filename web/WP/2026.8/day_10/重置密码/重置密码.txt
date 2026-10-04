@@ -1,0 +1,6 @@
+靶场地址: https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic
+
+本题未校验: 
+tmp-forget-password-token.owner == username
+
+导致我稍微修改 wiener重置密码的请求包: username=carlos,就能修改其他用户的密码

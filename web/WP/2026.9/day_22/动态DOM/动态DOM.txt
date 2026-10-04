@@ -1,0 +1,25 @@
+靶场地址: https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-innerhtml-sink
+
+=====新知识1: innerHTML=====
+先去找一找搜索框的 query会去到哪里 -> 图1
+innerHTML: 读取内容,并且按照 HTML规则解析
+            这些会被写入动态DOM -> F12,element
+
+###
+进入靶场
+在搜索框内注入<img src=x onerror=alert(1)>   // onerror别拼错了
+取x这个路径找图片,找不到就运行alert(1)    -> 图2
+solved
+
+补:
+###
+1. <script>alert(1)</script>
+会被写入 DOM,但是不会被自动执行
+=>
+2. <svg onload=alert(1)>    -> solved
+如果加载 svg成功,就会执行 alert(1)
+但是服务器仅仅初始化这块矢量图区域就可以了,不需要真的加载出来
+=>
+3. <img onload=alert(1)>
+这里没有src,加载不出来.触发不了
+此时就体现出来 onerror的作用了

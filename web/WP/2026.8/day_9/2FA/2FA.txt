@@ -1,0 +1,24 @@
+靶场地址: https://portswigger.net/web-security/authentication/multi-factor/lab-2fa-simple-bypass
+
+进入靶场后,账号密码都试着登录一下
+发现 /login2 需要二次验证 -> 图1
+此时有三种绕过方法
+
+###
+直接去改网页url -> 图2
+
+###
+点击 back to ...    -> 图3
+
+###
+去 burp 拦包,把有密码的 /login 放走
+=>
+然后,收到 /login2 的包, 直接改成: /my-account?id=carlos
+
+###
+漏洞: 服务器过早向客户端发送了过高权限的cookie
+一次用户名/密码验证之后, cookie发生变化 -> 图5,图6
+-> 
+此时的 cookie具备访问账号的权限,
+可以直接利用当前界面的 cookie访问账户
+从而跳过 MAF code 的多次验证

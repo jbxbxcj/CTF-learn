@@ -1,0 +1,4 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/union-attacks/lab-find-column-containing-text
+
+###
+具体知识去隔壁靶场

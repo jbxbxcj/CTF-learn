@@ -1,0 +1,41 @@
+靶场地址: https://portswigger.net/web-security/authentication/other-mechanisms/lab-brute-forcing-a-stay-logged-in-cookie
+
+###
+我们先尝试 intruder 直接暴力去测他的密码
+发现 "次数过多,1分钟后再试" ,触发风控了
+
+###
+我们登录 wiener 账号 -> 图1
+尝试攻击 cookie: stay_logged_in (下次自动登录)
+
+###
+怀疑 这是 base64 编码,丢进decoder解码 -> 图2
+发现有规律 用户名:MD5加密(密码)
+用已知密码 peter 计算 MD5，结果与冒号后的 32 位十六进制值一致。
+
+###
+在 intruder 右下角编辑 payload 进程 -> 图3
+1. MD5加密
+2. 添加前缀 carlos:
+3. 添加 base64 编码
+
+###
+多数状态码为302,有一个为200
+长度排序,攻击有效 -> 图4
+复制request,用 repeater发过去 -> solved
+
+# 如何在浏览器登录 carlos的账号
+F12 开发者工具,找到 cookie
+这里有两个: session.stay_logged_in
+把第一个改成 图4 里面服务器新签发会话凭证,第二个删掉
+点击 my account
+=>
+在浏览器里登录到 carlos的账号
+
+补:
+长期登录功能因使用服务端保存的随机令牌;
+不要让客户端持有可推导的密码相关信息;
+密码应当使用现代的.带盐的哈希保存;
+
+stay_logged_in: 用于长期保持登录状态的凭据
+session:  服务器认可身份后签发的当前会话凭据

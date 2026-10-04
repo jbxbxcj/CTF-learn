@@ -1,0 +1,15 @@
+靶场地址: https://portswigger.net/web-security/cross-site-scripting/contexts/lab-some-svg-markup-allowed
+
+=====新知识1:加载动画时执行=====
+<svg><animateTransform onbegin=alert(1)>
+矢量图    动画转换        开始时执行
+
+
+###
+这个靶场很神奇昂,拦截script等敏感内容   -> 图1
+但是没有直接HTML转码 <>
+
+###
+test123 先看看上下文 -> 图2
+搜<svg>发现未被拦截  -> <animateTransform onbegin=alert(1)>
+solved

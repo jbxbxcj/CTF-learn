@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<body>
+    <table>
+        <tr>
+            <td>用户名</td>
+            <td>admin</td>
+        </tr>
+
+        <tr>
+            <td>密码</td>
+            <td>123456</td>
+            <td hidden>棱彩: 藏一手</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">调用clospan,
+                使它占两列
+            </td>
+            <td rowspan="2">调用rowspan,
+                使它占两行
+            </td>
+            <td>clo/row + span, 还挺好记</td>
+        </tr>
+        <tr></tr><tr></tr>
+        <tr>
+            <td>visibility: hidden</td>
+            <td>隐藏</td>
+        </tr>
+
+        <tr>
+            <td>display:none</td>
+            <td>隐藏</td>
+        </tr>
+
+        <tr>
+            <td>opacity:0</td>
+            <td>完全透明</td>
+        </tr>
+
+        <tr>
+            <td>front-size:0</td>
+            <td>文字大小:0</td>
+        </tr>
+
+        <tr>
+            <td>color:white</td>
+            <td>白底文字</td>
+        </tr>
+
+        <tr>
+            <td rowspan="2">
+                position:absolute<br>
+                left:-9999px
+            </td>
+            <td rowspan="2">移出屏幕</td>
+        </tr>
+
+        <tr>
+            <td>这很注释<!-- flag--></td>
+            <td>注释</td>
+        </tr>
+
+        <tr>
+            <td>src=?</td>
+            <td>图片路径</td>
+        </tr>
+
+        <tr>
+            <td>data-flag</td>
+            <td>自定义属性</td>
+        </tr>
+    </table>
+
+    <h3>这又是一个补充,主要是th没提及</h3>
+    <table>
+        <tr>
+            <td>table</td>
+            <td>普通表格</td>
+        </tr>
+        <tr>
+            <td>tr</td>
+            <td>一行 table_row</td>
+        </tr>
+        <tr>
+            <td>td</td>
+            <td>普通数据格 table_data</td>
+        </tr>
+        <tr>
+            <td>th</td>
+            <td>表头格 table_header</td>
+        </tr>
+    </table>
+
+    <h3>这是一个成绩单</h3>
+    <table border="20">  <!-- broder控制表格边框大小,但是不常用了(CCS)-->
+        <tr>            <!--控制的还是外边框,1和20的区别挺大,自己改着玩吧-->
+            <th>姓名</th>
+            <th>年龄</th>   <!--th有一个参数scope,控制col/row -> 列/行标题-->
+            <th>成绩</th>
+        </tr>
+
+        <tr>
+            <td>烈阳哥</td>
+            <td>33550337</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>必痛哥</td>
+            <td>33550337</td>
+            <td>5</td>
+        </tr>
+    </table>
+</body>

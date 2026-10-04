@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<body>
+    <!--提交的是一整个form,不是单独的某一个数据,action表示交给谁,method是访问方式-->
+    <form action="login.php" method="get">
+        <h3>一个简单的注册界面</h3>
+        <!--type表示输入方式,这里是输入文本,placehoder是提示词,输入框里的灰字-->
+        <!--name: 如果你输入admin,服务器收到的就是 username=admin -->
+        用户名:
+        <input type="text" name="username" placeholder="请输入用户名" value="user"> <!--value是默认值-->
+        <br><br>
+
+        <!--这个type是数字,只能输入数字而且有上下的小箭头-->
+        年龄:
+        <input type="number" name="age">
+        <br><br>
+
+        <!--这个type会检测是否符合邮箱格式-->
+        邮箱:
+        <input type="email" name="user_email">
+        <br><br>
+
+        <!--这个type会出现表格给你选-->
+        出生时间:
+        <input type="date" name="brithday">
+        <br><br>
+
+        <!--emmm-->
+        我就是想看看这个颜色选择器长什么样子:
+        <input type="color" name="one_coloe">
+        <br><br>
+
+        <!--你可以上传一个文件,包括但不限制于:php jpg png zip-->
+        上传文件快速填写:
+        <input type="file" name="one_file">
+        <br><br>
+
+
+        <!--这个type输入之后是一堆星号 *** ,但仅限于视觉隐藏,F12还是会露馅-->
+        密码:
+        <input type="password" name="password">
+        <br><br>
+
+        <!--重点是submit,value写什么,网站就显示什么-->
+        <input type="submit" value="注册">
+    </form>
+</body>

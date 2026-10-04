@@ -1,0 +1,5 @@
+靶场地址: https://portswigger.net/web-security/access-control/lab-insecure-direct-object-references
+
+查看下载记录,能明显发现下载记录里面有明显的规律     -> 图一
+而下载从2.txt开始,回去下载1.txt,找到password      -> 图二
+solved

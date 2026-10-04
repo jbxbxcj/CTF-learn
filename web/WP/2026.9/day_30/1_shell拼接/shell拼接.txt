@@ -1,0 +1,19 @@
+靶场地址: https://portswigger.net/web-security/os-command-injection/lab-simple
+
+=====新知识1: Shell与PowerShell=====
+powershell是shell的一种
+| 和 whoami 这两个语法在shell中很常见
+
+=====新知识2: 如何判断SQL与Shell=====
+SQL主要看 四个数据库的 SELECT NULL 和休眠函数
+Shell 看 whoami 和 ping -c 10 127.0.0.1
+
+###
+进入靶场
+找到查询处,丢给repeater     -> 图1
+=>
+构造 | whoami           -> 图2
+| 的作用是让shell执行右边的东西
+whoami 会覆盖原来的输出
+=>
+solved

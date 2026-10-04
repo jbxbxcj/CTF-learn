@@ -1,0 +1,27 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/lab-login-bypass
+
+###
+在 password那里 SQL注进去
+solved
+
+###
+后端大概长这样:
+=>
+后端原本应该执行:
+SELECT * FROM users
+WHERE username = 'jbx'
+AND password = '123'
+=>
+ SQL注完,去掉 -- 注释,真正执行的是:
+SELECT * FROM users
+WHERE username = 'jbx'
+AND password = '123' OR 1=1
+
+###
+根因: SQL结构可以被用户输入改变
+-> 认证与权限边界失效
+
+###
+修复:
+1. 删掉用户输入中的 '
+2. 禁用 OR AND 等敏感字符

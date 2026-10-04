@@ -1,0 +1,20 @@
+靶场地址: https://portswigger.net/web-security/file-upload/lab-file-upload-web-shell-upload-via-extension-blacklist-bypass
+
+=====新知识1:.htaccess=====
+.htaccess 是Apache的目录配置文件 -> 决定什么后缀的文件怎么处理
+通过上传这个配置文件,我们自定义了依旧 .jbx的扩展文件会交给 PHP处理器解释
+
+###
+进入靶场
+发现 php文件进黑名单了      -> 图1
+=>
+我抓包把 read.php的 filename改成read.txt
+能上传,但是不会被php处理器执行      -> 图2,图3
+
+###
+上传 .htaccess文件,再上传read.jbx -> 图4
+solved
+
+补:
+我这里还犯了一个错误
+我第一次上传的是 abc.htaccess,因为前面加了个 abc,导致

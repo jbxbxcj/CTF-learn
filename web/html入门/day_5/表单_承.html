@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<body>
+    <!--label之后,点击用户名对应的输入框就会出现一闪一闪的 | (焦点),for和id就是用法-->
+    <label for="username">用户名:</label>
+    <input tpye="text" id="username" name="username">
+    <!--id仅在网址内部沟通使用,而name是交给服务器的-->
+    
+    <h3>select:下拉菜单</h3>
+    <select name="region">
+        请选择地区(selected为默认选项)
+        <option value="1" selected>中国</option>
+        <option value="2">美国</option>
+        <option value="3">日本</option>
+        服务器接收region="1"会更快一些
+    </select>
+
+    <h3>textarea:多行文本</h3>
+    <textarea row="500" cols="'300" placeholder="留言板,顺便复习placeholder">
+        好吧,placeholder似乎没有什么用处
+    </textarea>
+    <br><br>
+    <button>
+        <img src="../photo/2.jpg" title="button就是灵活一些的input type=submit" width="50" height="50">
+        <br>提交
+    </button>
+
+    <h3>复选框checkbox,单选radio,由相同的name确立</h3>
+    <h5>checkbox:厨</h5>
+    <p>
+        但是这里的默认选择不是selected,而是checked
+        <input type="checkbox" name="xp" value="liuying" checked>流萤
+        <input type="checkbox" name="xp" value="xilian">昔涟
+        <input type="checkbox" name="xp" value="jingliu">镜流
+        <input type="checkbox" name="xp" value="feixiao">飞霄
+        <input type="checkbox" name="xp" value="huohua">火花
+    </p>
+    <h5>radio:性别</h5>
+    <p>
+        <input type="radio" name="sex" value="male" checked>男
+        <input type="radio" name="sex" value="female">女
+    </p>
+    <button disabled>button里的disable会让按钮变灰,而非不显示在网页上</button>
+    <h5>readonly属性,代表用户不可修改</h5>
+</body>

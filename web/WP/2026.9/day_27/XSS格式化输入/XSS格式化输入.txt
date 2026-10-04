@@ -1,0 +1,17 @@
+靶场地址: https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-template-literal-angle-brackets-single-double-quotes-backslash-backticks-escaped
+
+=====新知识1:XSS的格式化输入=====
+py 里面的字符串有一个格式化输入 f"ans:{ans}"
+对于 XSS来说,也有   ->  ${alert(1)}
+
+###
+进入靶场,定位输入框     -> 图1
+发现这本身就是一个 <script>标签
+
+###
+直接注入 alert(1)会本当作文本
+</script><script>alert(1) 截断的话,尖括号会被当作路边一条编码 -> 图2
+
+###
+注入 ${alert(1)}    -> 图3
+solved

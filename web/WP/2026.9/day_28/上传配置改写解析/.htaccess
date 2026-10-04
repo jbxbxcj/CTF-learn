@@ -1,0 +1,13 @@
+# Apache 是一种 Web服务器软件;浏览器发出 HTTP请求后,通常由它接收.定位资源,并决定如何处理
+# .htaccess 是Apache可读取的目录级配置文件;
+# 若 Apache允许该目录使用它,放在/files/avatars/ 中的.htaccess会影响这个目录及其子目录的文件处理规则
+
+# AppType: Apache指令，用来为某类扩展名增加类型映射
+# 类型映射: 服务器的一张"文件扩展名",如何标记或处理的对照表,如 .php 交给PHP解释
+
+# application/x-httpd-php: php处理器识别的类型
+
+# .jbx: 自定义的扩展名
+
+# 让 php处理器 执行 .jbx的扩展文件
+AddType application/x-httpd-php .jbx

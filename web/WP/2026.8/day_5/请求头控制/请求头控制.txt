@@ -1,0 +1,6 @@
+靶场地址: https://portswigger.net/web-security/access-control/lab-referer-based-access-control
+
+Refere: 告诉服务器 请求大致从哪里前来 -> 不应该用来标识用户身份
+
+把refere改了,
+solved

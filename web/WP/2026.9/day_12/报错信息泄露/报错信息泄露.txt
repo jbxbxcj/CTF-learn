@@ -1,0 +1,24 @@
+靶场地址: https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-in-error-messages
+
+###
+去看一个商品
+尝试把 productid 改为 -1, 404 not found -> 图1
+
+###
+尝试跳出整数类型, 输入 abc
+500,发现报错信息 -> 图2
+(不管了,我还没学到java) -> 找到版本号
+solved
+
+###本题漏洞
+服务器的预期productID是整数,识别类似 py里的 int(input())
+- 输入 -1当成正常请求,继续处理这个 id为 -1的商品编号,只是找不到,显示 404 Not Found
+- 输入 abc,JAVA的 integer.parseInt() 无法把它转化为整数,抛出 NumberFormatException
+- 服务器未对异常做同一隐藏,直接向客户端返回了异常堆栈和 Apache Structs 2.3.31 的版本信息
+
+根因:
+生产环境将内部异常细节直接暴露给用户
+
+修复:
+校验参数类型;返回通用错误信息;异常栈堆仅写入服务端日志;
+关闭生产环境调试信息与框架版本暴露

@@ -1,0 +1,24 @@
+靶场地址: https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-authentication-bypass
+
+=====新知识1: TRACE=====
+和 get,post一桌的 http诊断方法
+本靶场中,会回显服务器实际收到的请求
+
+###
+进入靶场
+反正我搜了一圈,没有找到什么有价值的信息
+
+###
+将 GET /admin 改为 TRACE /admin
+响应末尾多了一行 IP,这是前端加上的  -> 图1
+附:这个 IP是自定义的非规范类型
+
+###
+我们伪造一份 X-Custom-Ip-Authorization: 127.0.0.1
+会让后端误以为是: 后端在访问admin,而非外来用户访问  -> 图2
+
+###
+直接访问 /admin/delete?username=carlos -> 图3
+solved
+
+根因: 后端信任了前端用户数据

@@ -1,0 +1,4 @@
+靶场地址: https://0aa700f8045c74008280f13600cb00df.web-security-academy.net/my-account?id=alterwind
+
+暴力破解
+没了

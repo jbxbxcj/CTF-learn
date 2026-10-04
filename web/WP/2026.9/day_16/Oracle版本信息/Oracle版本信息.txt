@@ -1,0 +1,34 @@
+靶场地址: https://portswigger.net/web-security/sql-injection/examining-the-database/lab-querying-database-version-oracle
+
+=====新知识=====
+Java / Python / PHP / Node.js   -> 后端程序
+Oracle / MySQL / PostgreSQL     -> 不同类型的 数据库管理系统(DBMS)
+SQL                             -> 与数据库交流的查询语言
+=>
+前面学的是SQL通用核心:
+UNION
+SELECT...FROM...WHERE
+这些多数数据库都支持
+=>
+不同类型的数据库还有自己的'方言'
+比如:本 lab的的 DUAL虚拟单行表(表单界的NULL)
+-- 多数数据库的通用语法
+SELECT NULL,NULL
+-- Oracle数据库中 SELECT要找的东西,要提供一个明确的来源
+SELECT NULL,NULL FROM DUAL
+
+=====新知识2=====
+SQL对于没有加引号的关键字,列名.表名等一般不区分大小写
+(但是教材习惯把关键字和系统变量等大写,用于区分)
+
+=====新知识3=====
+SELECT banner FROM v$version
+SELECT BANNER FROM V$VERSION
+->
+v$version: 层级同 products,users;但它是 Oracle的 *系统视图,用于提供 *数据库运行状态 和 *版本信息.
+banner: 层级类似 password; -> 供人阅读一段"横幅式说明文本",是 v$version中保存文本的列名
+
+###
+进入靶场
+运用刚才的知识,注进去 -> 图1,图2
+回显版本信息,solved

@@ -1,0 +1,21 @@
+靶场地址: https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses
+
+这个靶场... 很奇怪
+
+###
+在intruder右下角的 setting里面配置Grap-match
+一个类似搜索栏的东西,配置过程比较简单,不多赘述  -> 图1
+
+###
+有效账密返回包里面是 Invalid username or password
+无效返回 Invalid username or password.
+这之间差了一个 .
+(我很好奇这怎么发现的,算了,以后记着点吧)
+
+###
+根据返回包的差异,我们开始攻击 -> 图2,图3
+solved
+
+###
+用正常账密和无效账密都试一试
+丢掉compare对比吧
